@@ -2,7 +2,7 @@ const User = require('../model/user.model');
 
 module.exports.register = async (req, res) => {
     try {
-
+//h
         const email = req.body.email;
         const password = req.body.password;
         //const name = req.body.name || '';
