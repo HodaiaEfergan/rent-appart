@@ -2,7 +2,7 @@ const User = require('../model/user.model');
 
 module.exports.register = async (req, res) => {
     try {
-//h
+
         const email = req.body.email;
         const password = req.body.password;
         //const name = req.body.name || '';
@@ -31,4 +31,23 @@ module.exports.register = async (req, res) => {
         console.log("bamba");
         res.status(500).json({success: false, message: e})
     }
+};
+
+module.exports.login = async (req, res) => {
+
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        if (!email || !password) return res.status(400).json({
+            success: false,
+            message: 'please enter username and password'
+        });
+        let user = await User.findOne({email: email, password: password}); //search user with this data
+        if (!user) return res.status(400).json({success: false, message: 'email or password are incorrect'}); //the name or password is encorrct
+
+
+    } catch (e) {
+        res.status(500).json({success: false, message: e})
+    }
+
 };
