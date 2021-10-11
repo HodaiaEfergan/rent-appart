@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-const API_PORT = process.env.PORT || 3003;
+const cors = require('cors');
+const logger = require('morgan');
+const API_PORT = process.env.PORT || 3000;
 
 
 //mongodb+srv://hodaia:<password>@users.h9ck0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -17,17 +18,12 @@ mongoose
     .connect(db)
     .then(() => console.log('mongodb connected'))
     .catch(err => console.error(err));
-
+app.use(logger('dev'));
+app.use(cors());
 app.use(bodyParser.json({limit: '50mb'})); // for parsing application/json
 app.use(bodyParser.urlencoded({extended: true, limit: '50mb'})); // for parsing
 
-
-// load controller
-//const apiCtrl = require('./routes/api');
-
-
-// app.use('/', res.sendFile(index.html));
-//app.use('/api', apiCtrl);
-
+const apiCtrl = require('./routes/api');
+app.use('/api', apiCtrl);
 
 app.listen(API_PORT, () => console.log(`http server is listening on port ${API_PORT}`));

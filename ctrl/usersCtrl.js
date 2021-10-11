@@ -1,5 +1,6 @@
-const User = require('../model/user.model');
+//const User = require('../model/user.model');
 
+const User = require("../models/user.model");
 module.exports.register = async (req, res) => {
     try {
 
@@ -9,11 +10,11 @@ module.exports.register = async (req, res) => {
         console.log(email);
         console.log(password);
         //if the user dont enter email or password
-        if (!email || !password) return res.status(400).json({
-            success: false,
-            message: 'please enter email and password'
-
-        });
+         if (!email || !password) return res.status(400).json({
+             success: false,
+             message: 'please enter email and password'
+        //
+         });
 
 
 
