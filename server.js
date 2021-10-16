@@ -6,10 +6,9 @@ const logger = require('morgan');
 const API_PORT = process.env.PORT || 3000;
 
 
-//mongodb+srv://hodaia:<password>@users.h9ck0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
+//import mongoose database libarary
 const mongoose = require('mongoose');
-// mongodb+srv://admin:<password>@g-tag-930.l1iqv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 //from the atlas mongodb
 const db = 'mongodb+srv://hodaia:1234@users.h9ck0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
@@ -18,11 +17,12 @@ mongoose
     .connect(db)
     .then(() => console.log('mongodb connected'))
     .catch(err => console.error(err));
+//libararies
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json({limit: '50mb'})); // for parsing application/json
 app.use(bodyParser.urlencoded({extended: true, limit: '50mb'})); // for parsing
-
+//require to our api
 const apiCtrl = require('./routes/api');
 app.use('/api', apiCtrl);
 
